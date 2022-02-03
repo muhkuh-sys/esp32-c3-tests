@@ -33,3 +33,17 @@ Titel
 
 
 # Firmware flashen
+
+Tested with version 3.2 . Please note that Ubuntu currently provides only v2.8, which is too old for the ESP32-C3.
+
+Vorbereitung (nur einmal nötig):
+```
+sudo apt install python3-pip
+pip install esptool
+```
+
+Dann flashen, indem man in diesem Git Repo ins Verzeichnis "firmware" wechselt, und das Kommando ausführt:
+
+```
+~/.local/bin/esptool.py -p /dev/ttyUSB0 -b 460800 --before default_reset --after hard_reset --chip esp32c3  write_flash --flash_mode dio --flash_size detect --flash_freq 40m 0x0 bootloader.bin 0x8000 partition-table.bin 0x10000 nodemcu.bin
+```
